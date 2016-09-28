@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.2.min.js">
+</script>
+<script src="https://raw.githubusercontent.com/ethereum/web3.js/0.16.0/dist/web3.min.js"></script>
+<script src=bignumber.js></script>
+<script src=myscripts.js></script>
+</head>
+<body>
+
+<h2>This is a heading</h2>
+
+<p>This is a paragraph.</p>
+<p>This is another paragraph.</p>
+
+<label>Secret address:</label>
+<select id="secret_address">
+</select>
+<button id="make_claim">register claim</button>
+
+<p>===============</p>
+
+<label>Public address:</label>
+<select id="public_address">
+</select>
+
+</body>
+</html>
+
+
