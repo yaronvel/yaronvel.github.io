@@ -219,6 +219,9 @@ var selectAccountChange = function(){
         return;
     }
     
+    $('#secret_address').attr('disabled', true);
+    $('#public_address').attr('disabled', true);
+    
     getDeals();
 };
 

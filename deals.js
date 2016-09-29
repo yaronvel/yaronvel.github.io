@@ -88,21 +88,24 @@ function DealUI(deal){
         return number + ""; // always return a string
     };    
     
+    function getAddressesInfix(){
+        return  "_" + getPublicAccount().toString() + "_" + getPrivateAccount().toString() + "_";
+    }
     
     this.listItemId = function(){
-      return "DealUI_listitem_id_" + this.deal._dealId.toString();  
+      return "DealUI_listitem_id_" + getAddressesInfix() + this.deal._dealId.toString();  
     };
 
     this.dealId = function(){
-      return "DealUI_deal_id_" + this.deal._dealId.toString();  
+      return "DealUI_deal_id_" + getAddressesInfix() + this.deal._dealId.toString();  
     };    
     
     this.actionId = function(){
-      return "DealUI_action_id_" + this.deal._dealId.toString();  
+      return "DealUI_action_id_" + getAddressesInfix() + this.deal._dealId.toString();  
     };
       
     this.timeId = function(){
-      return "DealUI_time_id_" + this.deal._dealId.toString();  
+      return "DealUI_time_id_" + getAddressesInfix() + this.deal._dealId.toString();  
     };      
       
     this.makeDealIdObject = function(){
