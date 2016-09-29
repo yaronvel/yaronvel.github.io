@@ -9,7 +9,6 @@ window.addEventListener('load', function() {
         web3 = new Web3(web3.currentProvider);
 
     } else*/ if (typeof Web3 !== 'undefined') {
-        alert(1);
         // If there isn't then set a provider
         web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
