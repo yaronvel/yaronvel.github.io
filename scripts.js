@@ -1,8 +1,38 @@
-window.addEventListener('load', function() {
-    $("#before_load").hide();
+var allDealsPage = function(){
+    $("#all_deals_div").show();
+    $("#my_deals_div").hide();
+    
+    $("#all_deals_table").hide();
+    makeAllDealsTable();
+}
+
+var myDealsPage = function(){
+    $("#my_deals_div").show();
+    $("#all_deals_div").hide();
+        
+    $("#before_load").show();
     $("#after_load").hide();
     $("#active_deals_title").html("<a>Active Deals</a>: " + claimSizeInEther.toString() + " Ether deposit, " +
         depositSizeInEther.toString() + " Ether collateral");
+        
+    var accounts = web3.eth.accounts;
+
+    $('#secret_address').append($('<option>', {value: -1, text: "Select your secret account"}));    
+    $('#public_address').append($('<option>', {value: -1, text: "Select your public account"}));
+        
+    for( var i = 0 ; i < accounts.length ; i++ ){
+        $('#secret_address').append($('<option>', {value: i, text: accounts[i].toString()}));
+        $('#public_address').append($('<option>', {value: i, text: accounts[i].toString()}));       
+    }
+    
+    $('#secret_address').val(-1);    
+    $('#public_address').val(-1);    
+    
+    $('#secret_address').on('change', selectAccountChange);
+    $('#public_address').on('change', selectAccountChange);                
+}
+
+window.addEventListener('load', function() {
     
     
 //function init() {
@@ -31,20 +61,6 @@ window.addEventListener('load', function() {
     
     var simplemixerContract = web3.eth.contract(contractABI);
     globalContractInstance = simplemixerContract.at(contractAddressTestnet);
-    
-    var accounts = web3.eth.accounts;
-
-    $('#secret_address').append($('<option>', {value: -1, text: "Select your secret account"}));    
-    $('#public_address').append($('<option>', {value: -1, text: "Select your public account"}));
-        
-    for( var i = 0 ; i < accounts.length ; i++ ){
-    	$('#secret_address').append($('<option>', {value: i, text: accounts[i].toString()}));
-        $('#public_address').append($('<option>', {value: i, text: accounts[i].toString()}));    	
-    }
-    
-    $('#secret_address').val(-1);    
-    $('#public_address').val(-1);    
-    
-    $('#secret_address').on('change', selectAccountChange);
-    $('#public_address').on('change', selectAccountChange);
+   
+    allDealsPage();    
 });

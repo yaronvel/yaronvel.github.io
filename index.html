@@ -22,7 +22,8 @@
     <script src="globalParams.js"></script>    
     <script src="userinput.js"></script>    
     <script src="deals.js"></script>    
-    <script src="events.js"></script>    
+    <script src="events.js"></script>
+    <script src="allDeals.js"></script>       
     <script src="scripts.js"></script>
 </head>
 <body>
@@ -40,10 +41,7 @@
     <aside class="dapp-aside">
     
     <nav>
-    <div class="list-group">
-  
-</div>
-    
+    <div class="list-group">    
         <ul>
             <li>
                 <a class="list-group-item" href="#"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; Home</a>
@@ -59,58 +57,134 @@
             </li>
             
         </ul>
+    </div>        
     </nav>    
     </aside>
 
     <!-- content-->
     <main class="dapp-content">
-    <div align="center">        
-        <span class="item-box-address">
-            <span class="item-address">
-                <span aria-hidden="true" class="icon-ghost"></span>&nbsp; Secret Account:        
-            </span>
-        </span>   
-        <select id="secret_address">
-        </select>
-    </div>
-    
-    <div align="center">        
-        <span class="item-box-address">
-            <span class="item-address">
-                <span aria-hidden="true" class="icon-user"></span>&nbsp; Public Account:        
-            </span>
-        </span>   
-        <select id="public_address">
-        </select>
-    </div>
-
-
-
-    <div id="after_load">
-        <div align="center"><h2 id="active_deals_title"></h2></div>
-        <div id="first_new_deal" align="center"></div>
-        <ul id="deal_list">
-        </ul>
-    </div>
-    
-    <div id="outer">
-      <div id="middle">
-        <div id="inner">
-        
-            <div id="before_load" align="center">
-                <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                <span class="sr-only">Loading...</span>    
-            </div>
-        
+    <div id="my_deals_div">
+        <div align="center">        
+            <span class="item-box-address">
+                <span class="item-address">
+                    <span aria-hidden="true" class="icon-ghost"></span>&nbsp; Secret Account:        
+                </span>
+            </span>   
+            <select id="secret_address">
+            </select>
         </div>
-      </div>
-    </div>    
+        
+        <div align="center">        
+            <span class="item-box-address">
+                <span class="item-address">
+                    <span aria-hidden="true" class="icon-user"></span>&nbsp; Public Account:        
+                </span>
+            </span>   
+            <select id="public_address">
+            </select>
+        </div>
+    
+    
+    
+        <div id="after_load">
+            <div align="center"><h2 id="active_deals_title"></h2></div>
+            <div id="first_new_deal" align="center"></div>
+            <ul id="deal_list">
+            </ul>
+        </div>
+        
+        <div id="outer">
+          <div id="middle">
+            <div id="inner">
+            
+                <div id="before_load" align="center">
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                    <span class="sr-only">Loading...</span>    
+                </div>
+            
+            </div>
+          </div>
+        </div>
+    </div>
+    
+    <div id="all_deals_div">
+        <h3>Legend (see deals below)</h3>
+        <table>
+            <tr>
+                <th>Icon</th>
+                <th>Meaning</th>
+                <th>Corresponding Variable in Contract</th>
+            </tr>
+            <tr>
+                <td><i class="fa fa-hashtag" aria-hidden="true"></i></td>
+                <td>Deal Id</td>
+                <td><code class="language-javascript">_dealId</code></td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-calendar" aria-hidden="true"></i></td>
+                <td>Start Date</td>
+                <td><code class="language-javascript">_startTime</code></td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-clock-o" aria-hidden="true"></i><i class="fa fa-shopping-cart" aria-hidden="true"></i></td>
+                <td>Joining Phase Duration (in hours, from the start date)</td>
+                <td><code class="language-javascript">_claimDurationInHours</code></td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-clock-o" aria-hidden="true"></i><i class="fa fa-bank" aria-hidden="true"></i></td>
+                <td>Deposit Duration Phase (in hours, from the end of the joining phase)</td>
+                <td><code class="language-javascript">_depositDurationInHours</code></td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-money" aria-hidden="true"></i></td>
+                <td>Value to Mix (in Ether)</td>
+                <td><code class="language-javascript">_claimUnitValueInWei</code></td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-legal" aria-hidden="true"></i></td>
+                <td>Collateral Amount (in Ether)</td>
+                <td><code class="language-javascript">_claimDepositInWei</code></td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-user-times" aria-hidden="true"></i></td>
+                <td>Minimal Required Number of Users (in Ether)</td>
+                <td><code class="language-javascript">_minNumClaims</code></td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-users" aria-hidden="true"></i></td>
+                <td>Current Number of Users</td>
+                <td><code class="language-javascript">Deal::numClaims</code></td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-percent" aria-hidden="true"></i></td>
+                <td>Current Percentage of Deposited Funds</td>
+                <td><code class="language-javascript">100 * Deal::depositSum / Deal::claimSum</code></td>
+            </tr>                                                                                    
+        </table>
+        <h2 align="center">All Deals</h2>
+                    
+        <table align="center" id="all_deals_table" class="dapp-zebra">            
+        </table>
+        <div id="outer">
+          <div id="middle">
+            <div id="inner">
+            
+                <div id="all_deals_before_load" align="center">
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                    <span class="sr-only">Loading...</span>    
+                </div>
+            
+            </div>
+          </div>
+        </div>
+        
+    <div>
 
     </main>
 
     <!-- actionbar -->
-    <aside class="dapp-actionbar dapp-overflow">
-sdsds
+    <aside class="dapp-actionbar dapp-overflow" hidden>
+
     </aside>
 
 </div>

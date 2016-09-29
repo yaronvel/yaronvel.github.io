@@ -204,6 +204,8 @@ function DealUI(deal){
         if( ! this.deal.isInWithdrawPhase() ){
             if( this.deal.status === null ) return "";
         }
+        else if( ! this.deal.deposit ) return "";
+        
         if( this.waitingForconfirm ) return "";
                 
         var text;
@@ -223,7 +225,7 @@ function DealUI(deal){
                 text = "Not enough users. Withdraw collateral to secret account";
             }
             else if( ! this.deal.fullyFunded ){
-                text = "Cheat detected. Withdraw collateral and deposit to secret account";
+                text = "Cheat detected. Withdraw collateral and deposit to public account";
             }
             else{
                 text = "Successful mix";
