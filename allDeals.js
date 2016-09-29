@@ -83,3 +83,10 @@ var makeAllDealsTable = function(){
     });
 };
 
+var allDealsPage = function(){
+    $("#all_deals_div").show();    
+    $("#all_deals_table").hide();
+    makeAllDealsTable();
+};
+
+
