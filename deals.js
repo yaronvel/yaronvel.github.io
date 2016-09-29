@@ -200,11 +200,11 @@ function DealUI(deal){
         return string;                                
     };
     
-    this.makeInfoObject = function(){            
+    this.makeInfoObject = function(){
         if( ! this.deal.isInWithdrawPhase() ){
             if( this.deal.status === null ) return "";
         }
-        else if( ! this.deal.deposit ) return "";
+        else if( ! this.deal.deposit && this.deal.enoughClaims ) return "";
         
         if( this.waitingForconfirm ) return "";
                 
@@ -239,7 +239,7 @@ function DealUI(deal){
         return string;                                
     };   
           
-    this.makeObjectsString = function(){
+    this.makeObjectsString = function(){    
         var idObject = this.makeDealIdObject();
         var todoObject = this.makeTodoObject();
         var timeObject = this.makeTimeObject();
