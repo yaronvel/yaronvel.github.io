@@ -63,9 +63,15 @@
 
     <!-- content-->
     <main class="dapp-content">    
+        
     <div id="all_deals_div">
-        <h3>Legend (see deals below)</h3>
-        <table>
+        <div style="clear: both">
+            <h2 style="float: left">All Deals</h2>
+            <h2 style="float: right" id="all_deals_show_legend">Show Legend</h2>
+        </div>
+    
+        
+        <table id="all_deals_table_legend">
             <tr>
                 <th>Icon</th>
                 <th>Meaning</th>
@@ -117,7 +123,6 @@
                 <td><code class="language-javascript">100 * Deal::depositSum / Deal::claimSum</code></td>
             </tr>                                                                                    
         </table>
-        <h2 align="center">All Deals</h2>
                     
         <table align="center" id="all_deals_table" class="dapp-zebra">            
         </table>

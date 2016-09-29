@@ -83,9 +83,22 @@ var makeAllDealsTable = function(){
     });
 };
 
+var toggleLegend = function(){
+    //$("#all_deals_show_legend").toggle();
+    $("#all_deals_table_legend").toggle();
+    if($("#all_deals_show_legend").html() === "Show Legend"){
+       $("#all_deals_show_legend").html("Hide Legend"); 
+    }
+    else{
+       $("#all_deals_show_legend").html("Show Legend");        
+    }
+};
+
 var allDealsPage = function(){
     $("#all_deals_div").show();    
     $("#all_deals_table").hide();
+    $("#all_deals_table_legend").hide();
+    $("#all_deals_show_legend").click(toggleLegend);    
     makeAllDealsTable();
 };
 
