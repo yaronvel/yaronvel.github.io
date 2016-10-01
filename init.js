@@ -3,12 +3,12 @@ window.addEventListener('load', function() {
     
 //function init() {
     // Checks Web3 support
-    /*
+    
     if(typeof web3 !== 'undefined' && typeof Web3 !== 'undefined') {
         // If there's a web3 library loaded, then make your own web3
         web3 = new Web3(web3.currentProvider);
 
-    } else*/ if (typeof Web3 !== 'undefined') {
+    } else if (typeof Web3 !== 'undefined') {
         // If there isn't then set a provider
         web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 

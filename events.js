@@ -222,6 +222,7 @@ var selectAccountChange = function(){
     $('#secret_address').attr('disabled', true);
     $('#public_address').attr('disabled', true);
     
+    
     getDeals();
 };
 
