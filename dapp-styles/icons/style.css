@@ -253,7 +253,15 @@ a:focus {
 }
 
 .item-actions {
-    background-color: #fff;
+    background-color: #ffffcc;
+    color: #33383e;
+    border-radius: 20px;
+    display: inline-block;
+    padding: 0.5em;
+}
+
+.item-todo-actions {
+    background-color: #ccccff;
     color: #33383e;
     border-radius: 20px;
     display: inline-block;
@@ -269,7 +277,7 @@ a:focus {
 }
 
 .item-address {
-    background-color: #fff;
+    background-color: #ffffcc;
     color: #33383e;
     border-radius: 8px;
     display: inline-block;
@@ -286,7 +294,7 @@ a:focus {
 }
 
 .item-new-deal {
-    background-color: #fff;
+    background-color: #ccccff;
     color: #33383e;
     border-radius: 20px;
     display: block;

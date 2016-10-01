@@ -1,10 +1,9 @@
 var myDealsPage = function(){
-    $("#my_deals_div").show();
-        
+    $("#my_deals_div").show();        
     $("#before_load").hide();
     $("#after_load").hide();
-    $("#active_deals_title").html("<a>Active Deals</a>: " + claimSizeInEther.toString() + " Ether deposit, " +
-        depositSizeInEther.toString() + " Ether collateral");
+    $("#active_deals_title").html("<a>Active Deals:</a><span style = \"display: block;\">" + claimSizeInEther.toString() + " ETH deposit &nbsp;" +
+        depositSizeInEther.toString() + " ETH collateral</span>");
         
     var accounts = web3.eth.accounts;
 
@@ -20,7 +19,12 @@ var myDealsPage = function(){
     $('#public_address').val(-1);    
     
     $('#secret_address').on('change', selectAccountChange);
-    $('#public_address').on('change', selectAccountChange);                
+    $('#public_address').on('change', selectAccountChange);
 };
+
+
+
+
+
 
 

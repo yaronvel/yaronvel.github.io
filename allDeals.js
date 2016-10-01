@@ -98,7 +98,7 @@ var allDealsPage = function(){
     $("#all_deals_div").show();    
     $("#all_deals_table").hide();
     $("#all_deals_table_legend").hide();
-    $("#all_deals_show_legend").click(toggleLegend);    
+    $("#all_deals_show_legend").mouseover(toggleLegend);    
     makeAllDealsTable();
 };
 

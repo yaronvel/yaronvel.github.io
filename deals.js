@@ -46,7 +46,7 @@ function NewDealUI(){
             icon = "icon-hourglass";            
         }
         else{
-            action = "Create New Mixing Deal";
+            action = "Create New Mixing Deal (it is free)";
             icon = "icon-star";
         }
         
@@ -151,7 +151,7 @@ function DealUI(deal){
             }
         }
         
-        var string = "<span class=\"item-box-actions\"><span class=\"item-actions\"><span aria-hidden=\"true\" class=\""
+        var string = "<span class=\"item-box-actions\"><span class=\"item-todo-actions\"><span aria-hidden=\"true\" class=\""
                    + icon + 
                    "\"></span>&nbsp;" + action +"</span></span>";
         string = "<button id=\"" + this.actionId() + "\">" + string + "</button>";
