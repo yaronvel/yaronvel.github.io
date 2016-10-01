@@ -2,8 +2,8 @@ var myDealsPage = function(){
     $("#my_deals_div").show();        
     $("#before_load").hide();
     $("#after_load").hide();
-    $("#active_deals_title").html("<a>Active Deals:</a><span style = \"display: block;\">" + claimSizeInEther.toString() + " ETH deposit &nbsp;" +
-        depositSizeInEther.toString() + " ETH collateral</span>");
+    $("#active_deals_title").html("<a>Active Deals</a><span style = \"display: block;\">" + claimSizeInEther.toString() + " ETH deposit &nbsp;" +
+        depositSizeInEther.toString() + " ETH collateral &nbsp; Each phase takes " + dealDefaultParams._claimDurationInHours.toString() + " hours</span>");
         
     var accounts = web3.eth.accounts;
 

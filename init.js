@@ -1,15 +1,15 @@
 var noClientError = function(){
-    $("#before_load").html("<h1>Could not find ethereum client</h1>");
-    alert("Could not find ethereum client");
+    $("#before_load").html("<h1>Could not find an ethereum client</h1>");
+    alert("Could not find an ethereum client");
     return -1;
 };
 
 
 window.addEventListener('load', function() {
 // must have:
-// instructions
-// change contract to give only half profit
-// do about - write github md 
+// connect github links
+// do about - write github md
+// scenario testing 
     
 //function init() {
     // Checks Web3 support
@@ -51,11 +51,14 @@ window.addEventListener('load', function() {
 
         globalContractInstance = simplemixerContract.at(contractAddress);
         var page = location.pathname.split("/").slice(-1);
-        if( page.toString() === "index.html" || page.toString() === ""){            
+        if( page.toString() === "mydeals.html"){            
              myDealsPage();
         }
         else if( page.toString() === "alldeals.html" ){
             allDealsPage();
         }                        
-    });        
+    });
+    
+    $(".span_collatoral_value").html(depositSizeInEther.toString());
+    $(".span_deposit_value").html(claimSizeInEther.toString());    
 });

@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="dapp-styles/icons/style.css">
     <link rel="stylesheet" type="text/css" href="dapp-styles/icons/simple-line-icons.css">        
     <link rel="stylesheet" type="text/css" href="fontawsome/font-awesome-4.6.3/css/font-awesome.css">
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">    
     <style type="text/css"> 
         #outer {height: 400px; overflow: hidden; position: relative;}
         #outer[id] {display: table; position: static;}
@@ -44,10 +45,13 @@
     <div class="list-group">    
         <ul>
             <li>
-                <a class="list-group-item" href="index.html"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; My Active Deals</a>
+                <a class="list-group-item" href="index.html"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; Home</a>
             </li>
             <li>
-                <a class="list-group-item" href="alldeals.html"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; All Deals</a>
+                <a class="list-group-item" href="mydeals.html"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i>&nbsp; Mix Dashboard</a>
+            </li>            
+            <li>
+                <a class="list-group-item" href="alldeals.html"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; Deals Monitor</a>
             </li>
             <li>
                 <a class="list-group-item" href="contract.html"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp; The Contract</a>
@@ -57,56 +61,67 @@
             </li>
             
         </ul>
-    </div>        
+    </div>
     </nav>    
     </aside>
 
     <!-- content-->
     <main class="dapp-content">
-    <div id="my_deals_div">
-        <div align="center">        
-            <span class="item-box-address">
-                <span class="item-address">
-                    <span aria-hidden="true" class="icon-ghost"></span>&nbsp; Secret Account:        
-                </span>
-            </span>   
-            <select id="secret_address">
-            </select>
+
+    <div style="height:100%">
+        <div class="w3-container w3-light-green">
+          <h1 align="center">THE PROTOCOL</h1>
         </div>
-        
-        <div align="center">        
-            <span class="item-box-address">
-                <span class="item-address">
-                    <span aria-hidden="true" class="icon-user"></span>&nbsp; Public Account:        
-                </span>
-            </span>   
-            <select id="public_address">
-            </select>
+        <div style="height:15%" class="w3-container w3-khaki">
+          <div align="center" style="font-size:375%;"><a>DAY 1</a> </div>
+        </div>    
+        <div class="w3-sand">
+        <ul><li>Users join the deal by making <span class="span_collatoral_value">todo</span> ETH collateral from their secret account.</li></ul>
         </div>
-    
-    
-    
-        <div id="after_load">
-            <div align="center"><h2 id="active_deals_title"></h2></div>
-            <div id="first_new_deal" align="center"></div>
-            <ul id="deal_list">
-            </ul>
+        <div  style="height:15%" class="w3-container w3-khaki">    
+          <div align="center" style="font-size:375%;"><a>DAY 2</a> </div>
+        </div>    
+        <div class="w3-sand">
+        <ul><li>Users deposit <span class="span_deposit_value">todo</span> ETH from their secret public account.</ul></li>
         </div>
-        
-        <div id="outer">
-          <div id="middle">
-            <div id="inner">
-            
-                <div id="before_load" align="center">
-                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                    <span class="sr-only">Loading...</span>    
-                </div>
-            
-            </div>
-          </div>
+        <div  style="height:15%" class="w3-container w3-khaki">
+          <div align="center" style="font-size:375%;"><a>DAY 3</a> </div>
+        </div>    
+        <div class="w3-sand">
+        <ul><li>If all users made a deposit, then every secret account withdraws <span class="span_deposit_value">todo</span> ETH and its <span class="span_collatoral_value">todo</span> ETH collateral.</ul></li>
+        <ul><li>Otherwise, the collaterals are divided among all public accounts who made a deposit.</ul></li>      
         </div>
     </div>
-    
+
+
+    <div style="height:100%">
+        <div align="center" class="w3-container w3-light-green">
+              <h1>THE DAPP</h1>
+        </div>
+        <div class="w3-sand">
+        To start click the <a class="list-group-item" href="mydeals.html"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i>&nbsp; Mix Dashboard</a> button and join an existing deal, or start a new one if no open deals currently exist.<br>
+        The web inteface allows to open a new deal once every 24 hours.<br>
+        In this beta stage, every public and secret account are allowed to join only once for every deal. The collateral and deposit size are fixed.<br>
+        </div>
+        <div align="center" class="w3-container">
+          <h3><p style="color:black">0 fees are charged!</p></h3>
+        </div>             
+        <div align="center" class="w3-container w3-red">
+          <h3><p style="color:black">The website is in beta stage and we do not offer any gaurantee for your funds or privacy.</p></h3>
+        </div>     
+    </div>
+    <div style="height:100%">    
+        <div align="center" class="w3-container w3-light-green">
+                  <h1>INFO FOR ADVANCE USERS</h1>
+        </div>            
+        <div class="w3-sand">
+        The website only reveals partial functionallity of the contract.
+        If you wish to create deals with different parmaters (like higher deposit values),
+        you should read the contract code (click on <a class="list-group-item" href="contract.html"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp; The Contract</a> button) and interact with its function directly via your ethereum wallet.<br>
+        A technical analysis of the protocol can be found <a href="#">here</a>  
+        </div>        
+    </div>
+        
     </main>
 
     <!-- actionbar -->
@@ -115,13 +130,6 @@
     </aside>
 
 </div>
-
-
-<!-- footer -->
-<footer class="dapp-footer dapp-overflow">
-    <div class="dapp-message"><a id="footer_status_msg"></a></div>
-</footer>
-
 
 
 
