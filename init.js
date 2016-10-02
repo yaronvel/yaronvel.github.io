@@ -5,6 +5,22 @@ var noClientError = function(){
     return -1;
 };
 
+var startPage = function(){
+    var simplemixerContract = web3.eth.contract(contractABI);    
+    globalContractInstance = simplemixerContract.at(contractAddress);
+    var page = location.pathname.split("/").slice(-1);
+    if( page.toString() === "mydeals.html"){            
+         myDealsPage();
+    }
+    else if( page.toString() === "alldeals.html" ){
+        allDealsPage();
+    }  
+    
+    $(".span_collatoral_value").html(depositSizeInEther.toString());
+    $(".span_deposit_value").html(claimSizeInEther.toString());                              
+};
+
+
 
 window.addEventListener('load', function() {
 // must have:
@@ -31,28 +47,27 @@ window.addEventListener('load', function() {
         return noClientError();    
     }
     globalWeb3 = web3;
-    var simplemixerContract = web3.eth.contract(contractABI);
+    
     globalWeb3.eth.getBlock(0, function(err, result){
         if( err ) return HandleError(err);
         if( result.hash.toString() === "0xd4e56740f876aef8c010b86a40d5f56745a118d0906a34e69aec8c0db1cb8fa3" ){
             // live
-            contractAddress = contractAddressMainnet;
+            contractAddress = contractAddressMainnet; // would have the same address in etc and eth
+            // check etc vs eth
+            globalWeb3.eth.getBlock(1920000, function(err, result){
+                if( err ) return HandleError(err);            
+                if( result.hash.toString() === "0x94365e3a8c0b35089c1d1195081fe7489b528a84b22199c916180db8b28ade7f"){
+                    etc = true;
+                }
+                
+                startPage();
+            });
+            
         }
         else if( result.hash.toString() === "0x0cd786a2425d16f152c658316c423e6ce1181e15c3295826d7c9904cba9ce303"){
             // testnet
             contractAddress = contractAddressTestnet;
+            startPage();
         }
-
-        globalContractInstance = simplemixerContract.at(contractAddress);
-        var page = location.pathname.split("/").slice(-1);
-        if( page.toString() === "mydeals.html"){            
-             myDealsPage();
-        }
-        else if( page.toString() === "alldeals.html" ){
-            allDealsPage();
-        }                        
     });
-    
-    $(".span_collatoral_value").html(depositSizeInEther.toString());
-    $(".span_deposit_value").html(claimSizeInEther.toString());    
 });

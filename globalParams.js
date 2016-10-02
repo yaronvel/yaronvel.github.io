@@ -13,9 +13,11 @@ var depositSizeInEther = depositSizeInWei.dividedBy(etherToWei);
 var claimSizeInEther = claimSizeInWei.dividedBy(etherToWei);
 var maxGas = 500000;
 
+var etc = false;
+
 var dealDefaultParams = {
-    _depositDurationInHours: new BigNumber(1),
-    _claimDurationInHours: new BigNumber(1),
+    _depositDurationInHours: new BigNumber(24),
+    _claimDurationInHours: new BigNumber(24),
     _claimUnitValueInWei: claimSizeInWei,
     _claimDepositInWei: depositSizeInWei,
     _minNumClaims:  new BigNumber(2)    
