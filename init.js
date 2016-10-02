@@ -10,6 +10,10 @@ window.addEventListener('load', function() {
 // connect github links
 // do about - write github md
 // scenario testing 
+// update testnet addresses
+// upload mainnet
+// classic ?
+// copy to dmixer
     
 //function init() {
     // Checks Web3 support
