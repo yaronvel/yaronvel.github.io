@@ -1,6 +1,7 @@
 var noClientError = function(){
+    var page = location.pathname.split("/").slice(-1);
+    if( page.toString() === "mydeals.html" || page.toString() === "alldeals.html" )     alert("Could not find an ethereum client");             
     $("#before_load").html("<h1>Could not find an ethereum client</h1>");
-    alert("Could not find an ethereum client");
     return -1;
 };
 
@@ -27,18 +28,7 @@ window.addEventListener('load', function() {
         web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
         if( ! web3.isConnected()) return noClientError();
     } else{
-        return noClientError();
-    
-        // If there is neither then this isn't an ethereum browser
-        document.getElementById("results").style.display = "none";
-        document.getElementById("see-results").style.display = "none";
-        document.getElementById("vote-support").style.display = "none";
-        document.getElementById("vote-against").style.display = "none";
-        document.getElementById("subtitle").style.display = "none";
-        document.getElementById("proposal").textContent = "Give Stakers a Voice";
-        var message = document.getElementById("message");
-        message.style.display = "block";
-        return;    
+        return noClientError();    
     }
     globalWeb3 = web3;
     var simplemixerContract = web3.eth.contract(contractABI);
