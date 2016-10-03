@@ -5,10 +5,7 @@ var noClientError = function(){
     return -1;
 };
 
-var startPage = function(){
-    $(".span_collatoral_value").html(depositSizeInEther.toString());
-    $(".span_deposit_value").html(claimSizeInEther.toString());                              
-    
+var startPage = function(){    
     var simplemixerContract = web3.eth.contract(contractABI);    
     globalContractInstance = simplemixerContract.at(contractAddress);
     var page = location.pathname.split("/").slice(-1);
@@ -24,7 +21,10 @@ var startPage = function(){
 
 
 
-window.addEventListener('load', function() {    
+window.addEventListener('load', function() {
+    $(".span_collatoral_value").html(depositSizeInEther.toString());
+    $(".span_deposit_value").html(claimSizeInEther.toString());                              
+    
     if(typeof web3 !== 'undefined' && typeof Web3 !== 'undefined') {
         // If there's a web3 library loaded, then make your own web3
         web3 = new Web3(web3.currentProvider);
