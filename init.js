@@ -6,6 +6,9 @@ var noClientError = function(){
 };
 
 var startPage = function(){
+    $(".span_collatoral_value").html(depositSizeInEther.toString());
+    $(".span_deposit_value").html(claimSizeInEther.toString());                              
+    
     var simplemixerContract = web3.eth.contract(contractABI);    
     globalContractInstance = simplemixerContract.at(contractAddress);
     var page = location.pathname.split("/").slice(-1);
@@ -16,25 +19,12 @@ var startPage = function(){
         allDealsPage();
     }  
     
-    $(".span_collatoral_value").html(depositSizeInEther.toString());
-    $(".span_deposit_value").html(claimSizeInEther.toString());                              
+
 };
 
 
 
-window.addEventListener('load', function() {
-// must have:
-// connect github links
-// do about - write github md
-// scenario testing 
-// update testnet addresses
-// upload mainnet
-// classic ?
-// copy to dmixer
-    
-//function init() {
-    // Checks Web3 support
-    
+window.addEventListener('load', function() {    
     if(typeof web3 !== 'undefined' && typeof Web3 !== 'undefined') {
         // If there's a web3 library loaded, then make your own web3
         web3 = new Web3(web3.currentProvider);
@@ -57,7 +47,9 @@ window.addEventListener('load', function() {
             globalWeb3.eth.getBlock(1920000, function(err, result){
                 if( err ) return HandleError(err);            
                 if( result.hash.toString() === "0x94365e3a8c0b35089c1d1195081fe7489b528a84b22199c916180db8b28ade7f"){
+                    alert("Ethereum Classic is still not supported :(")
                     etc = true;
+                    return;
                 }
                 
                 startPage();

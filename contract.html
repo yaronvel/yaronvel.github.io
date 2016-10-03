@@ -67,8 +67,8 @@
     <main class="dapp-content">
     <h3>The contract is deployed at:</h3>
     <ul>
-        <li>Testnet: 0x324234</li>
-        <li>Live network: 0x3434</li>
+        <li>Testnet: <a href="https://etherscan.io/address/0x2a150645c84a4c75761f51909d5a957cd353aa2d">0x2a150645c84a4c75761f51909d5a957cd353aa2d</a></li>
+        <li>Live network: <a href="https://etherscan.io/address/0x9bfe61748ba9b71789de234d2bdc8fa21047d3cb">0x9bfe61748ba9b71789de234d2bdc8fa21047d3cb</a></li>
         <li>Ethereum classic: comming soon</li>
     </ul>
     <h3>ABI</h3>
@@ -78,6 +78,9 @@
     
     <h3>Code</h3>
     <pre><code class="language-javascript">pragma solidity ^0.4.2;
+pragma solidity ^0.4.2;
+//This project is beta stage and might contain unknown bugs.
+//I am not responsible for any consequences of any use of the code or protocol that is suggested here.
 contract SimpleMixer {
     
     struct Deal{
@@ -160,22 +163,18 @@ contract SimpleMixer {
         // validations
         if( !_deals[dealId].active ){
             error = "deal is not active";
-            //ErrorLog( msg.sender, dealId, "makeClaim: deal is not active");
             errorDetected = true;
         }
         if( deal.startTime + deal.claimDurationInSec < now ){
             error = "claim phase already ended";            
-            //ErrorLog( msg.sender, dealId, "makeClaim: claim phase already ended" );
             errorDetected = true;
         }
         if( msg.value != deal.claimDepositInWei ){
             error = "msg.value must be equal to claim deposit unit";            
-            //ErrorLog( msg.sender, dealId, "makeClaim: msg.value must be equal to claim deposit unit" );
             errorDetected = true;
         }
         if( deal.claims[msg.sender] ){
             error = "cannot claim twice with the same address";
-            //ErrorLog( msg.sender, dealId, "makeClaim: cannot claim twice with the same address" );
             errorDetected = true;
         }
         
@@ -203,12 +202,10 @@ contract SimpleMixer {
         // validations
         if( msg.value == 0 ){
             error = "deposit value must be positive";
-            //ErrorLog( msg.sender, dealId, "makeDeposit: deposit value must be positive");
             errorDetected = true;
         }
         if( !_deals[dealId].active ){
             error = "deal is not active";
-            //ErrorLog( msg.sender, dealId, "makeDeposit: deal is not active");
             errorDetected = true;
         }
         Deal deal = _deals[dealId];
@@ -219,7 +216,6 @@ contract SimpleMixer {
         }
         if( deal.startTime + deal.claimDurationInSec + deal.depositDurationInSec < now ){
             error = "deposit phase is over";
-            //ErrorLog( msg.sender, dealId, "makeDeposit: deposit phase is over");
             errorDetected = true;
         }
         if( ( msg.value % deal.claimValueInWei ) > 0 ){
@@ -234,9 +230,6 @@ contract SimpleMixer {
         }
         if( deal.numClaims < deal.minNumClaims ){
             error = "deal is off as there are not enough claims. Call withdraw with you claimer address";
-            /*ErrorLog( msg.sender,
-                      dealId,
-                      "makeDeposit: deal is off as there are not enough claims. Call withdraw with you claimer address");*/
             errorDetected = true;
         }
         
@@ -297,10 +290,15 @@ contract SimpleMixer {
                 //ErrorLog( msg.sender, dealId, "withdraw: address made no deposit. Note that this should be called with the public address");
                 return ReturnValue.Error; // function non payable
             }
-            uint claimPayback = ( depositValue * deal.claimSum ) / (deal.depositSum * deal.claimValueInWei );
             
+            uint effectiveNumDeposits = deal.depositSum / deal.claimValueInWei;
+            uint userEffectiveNumDeposits = depositValue / deal.claimValueInWei;
+            uint extraBalance = ( deal.numClaims - effectiveNumDeposits ) * deal.claimDepositInWei;
+            uint userExtraBalance = userEffectiveNumDeposits * extraBalance / effectiveNumDeposits;
+
             deal.deposit[msg.sender] = 0; // invalidate user
-            withdrawedValue = depositValue + claimPayback;
+            // give only half of extra balance. otherwise dishonest party could obtain 99% of the extra balance and lose almost nothing
+            withdrawedValue = depositValue + deal.claimDepositInWei * userEffectiveNumDeposits + ( userExtraBalance / 2 );
             if( ! msg.sender.send(withdrawedValue) ) throw;
         }
         else{
@@ -329,7 +327,7 @@ contract SimpleMixer {
         uint numClaims = _deals[_dealId].numClaims;
         uint claimSum = _deals[_dealId].claimSum;
         uint depositSum = _deals[_dealId].depositSum;
-           
+        
         return [active, numClaims, claimSum, depositSum];
     }
 
