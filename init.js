@@ -41,25 +41,31 @@ window.addEventListener('load', function() {
     globalWeb3.eth.getBlock(0, function(err, result){
         if( err ) return HandleError(err);
         if( result.hash.toString() === "0xd4e56740f876aef8c010b86a40d5f56745a118d0906a34e69aec8c0db1cb8fa3" ){
-            // live
-            contractAddress = contractAddressMainnet; // would have the same address in etc and eth
-            // check etc vs eth
-            globalWeb3.eth.getBlock(1920000, function(err, result){
-                if( err ) return HandleError(err);            
-                if( result.hash.toString() === "0x94365e3a8c0b35089c1d1195081fe7489b528a84b22199c916180db8b28ade7f"){
-                    alert("Ethereum Classic is still not supported :(")
+            // live etc or eth
+            var amIOnTheForkABI = [{"constant":true,"inputs":[],"name":"forked","outputs":[{"name":"","type":"bool"}],"type":"function"},{"constant":false,"inputs":[],"name":"update","outputs":[],"type":"function"}];
+            var amIOnTheForkContract = web3.eth.contract(amIOnTheForkABI);   
+            var amIOnTheForkContractInstance = amIOnTheForkContract.at("0x2bd2326c993dfaef84f696526064ff22eba5b362");
+            amIOnTheForkContractInstance.forked({},function(err,result){
+                if( err ) return HandleError(err);
+                if( ! result ){
                     etc = true;
-                    return;
+                    contractAddress = contractAddressClassic;
+                }
+                else{
+                    etc = false;
+                    contractAddress = contractAddressMainnet;
                 }
                 
                 startPage();
-            });
-            
+            });          
         }
         else if( result.hash.toString() === "0x0cd786a2425d16f152c658316c423e6ce1181e15c3295826d7c9904cba9ce303"){
             // testnet
             contractAddress = contractAddressTestnet;
             startPage();
+        }
+        else{
+            return HandleError("unrecognized genesis block");
         }
     });
 });
