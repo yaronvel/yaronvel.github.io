@@ -1,5 +1,5 @@
 var contractAddress = null;
-var contractAddressTestnet = '0x2a150645c84a4c75761f51909d5a957cd353aa2d';
+var contractAddressTestnet = '0xc6465918d6659d6a67863fe826cf04776df51ac3';
 var contractAddressMainnet = '0x9bfe61748ba9b71789de234d2bdc8fa21047d3cb';
 var contractAddressClassic = '0xf97f84472ff349245dc09154285b644c54fd743d';
 
