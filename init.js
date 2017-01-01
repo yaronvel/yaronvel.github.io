@@ -59,7 +59,7 @@ window.addEventListener('load', function() {
                 startPage();
             });          
         }
-        else if( result.hash.toString() === "0x0cd786a2425d16f152c658316c423e6ce1181e15c3295826d7c9904cba9ce303"){
+        else if( result.hash.toString() === "0x41941023680923e0fe4d74a34bdac8141f2540e3ae90623718e47d66d1ca4a2d"){
             // testnet
             contractAddress = contractAddressTestnet;
             startPage();
