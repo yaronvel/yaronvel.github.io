@@ -1,30 +1,19 @@
 var noClientError = function(){
-    var page = location.pathname.split("/").slice(-1);
-    if( page.toString() === "mydeals.html" || page.toString() === "alldeals.html" )     alert("Could not find an ethereum client");             
+    alert("Could not find an ethereum client");             
     $("#before_load").html("<h1>Could not find an ethereum client</h1>");
     return -1;
 };
 
 var startPage = function(){    
-    var simplemixerContract = web3.eth.contract(contractABI);    
-    globalContractInstance = simplemixerContract.at(contractAddress);
-    var page = location.pathname.split("/").slice(-1);
-    if( page.toString() === "mydeals.html"){            
-         myDealsPage();
-    }
-    else if( page.toString() === "alldeals.html" ){
-        allDealsPage();
-    }  
+    var sellContract = web3.eth.contract(contractABI);    
+    globalContractInstance = sellContract.at(contractAddress);
     
-
+    myDealsPage();
 };
 
 
 
 window.addEventListener('load', function() {
-    $(".span_collatoral_value").html(depositSizeInEther.toString());
-    $(".span_deposit_value").html(claimSizeInEther.toString());                              
-    
     if(typeof web3 !== 'undefined' && typeof Web3 !== 'undefined') {
         // If there's a web3 library loaded, then make your own web3
         web3 = new Web3(web3.currentProvider);
@@ -59,7 +48,7 @@ window.addEventListener('load', function() {
                 startPage();
             });          
         }
-        else if( result.hash.toString() === "0x41941023680923e0fe4d74a34bdac8141f2540e3ae90623718e47d66d1ca4a2d"){
+        else if( result.hash.toString() === "0xa3c565fc15c7478862d50ccd6561e3c06b24cc509bf388941c25ea985ce32cb9"){
             // testnet
             contractAddress = contractAddressTestnet;
             startPage();

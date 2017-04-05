@@ -4,16 +4,6 @@ var alertStatus = function(msg) {
     $("#footer_status_msg").fadeOut(60000); // 1 minute    
 };
 
-var waitForEventConifrmFunc = function(event, tx, callback) {
-    event.watch(function(err, result) {
-        if (err) {
-            callback();
-            return handleError(err);
-        }
-        if (result.transactionHash === tx) callback(result.args);
-        event.stopWatching(function(){});
-    });
-};
 
 var createNewDealFunc = function() {
     var sender = getPublicAccount();

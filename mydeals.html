@@ -25,94 +25,90 @@
     <script src="events.js"></script>
     <script src="init.js"></script>
     <script src="myDeals.js"></script>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    
-      ga('create', 'UA-85156609-1', 'auto');
-      ga('send', 'pageview');
-    
-    </script>                
 </head>
 <body>
 
 
 <header class="dapp-header dapp-overflow">
 <div align="center">
-    <h1>Decenteralized Ether Mixer &nbsp<span style="color:red">BETA!</span></h1>
+    <h1>Decenteralized Sale of Chametz &nbsp<span style="color:red">BETA!</span></h1>
     </div>    
 </header>
 
 <div class="dapp-flex-content dapp-overflow">
     
-    <!-- aside -->
-    <aside class="dapp-aside">
-    
-    <nav>
-    <div class="list-group">    
-        <ul>
-            <li>
-                <a class="list-group-item" href="index.html"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; Home</a>
-            </li>
-            <li>
-                <a class="list-group-item" href="mydeals.html"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i>&nbsp; Mix Dashboard</a>
-            </li>            
-            <li>
-                <a class="list-group-item" href="alldeals.html"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; Deals Monitor</a>
-            </li>
-            <li>
-                <a class="list-group-item" href="contract.html"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp; The Contract</a>
-            </li>
-            <li>
-                <a class="list-group-item" href="about.html"><i class="fa fa-cog fa-fw" aria-hidden="true"></i>&nbsp; About</a>
-            </li>
-            
-        </ul>
-    </div>
-    </nav>    
-    </aside>
+
+
 
     <!-- content-->
     <main class="dapp-content">
-    <div id="my_deals_div">
-        <div align="center">        
-            <span class="item-box-address">
-                <span class="item-address">
-                    <span aria-hidden="true" class="icon-ghost"></span>&nbsp; Secret Account:        
-                </span>
-            </span>   
-            <select id="secret_address">
-            </select>
+        <div class="w3-container w3-light-green">
+          <h1 align="center">Chametz Sale</h1>
+        </div>
+        <div style="height:15%" class="w3-container w3-khaki">
+          <div align="center" style="font-size:200%;"><a>What is Chametz?</a> </div>
+        </div>    
+        <div class="w3-sand">
+        <ul><li>Chametz are leavened foods that are forbidden on the Jewish holiday of Passover. According to Jewish law, Jews may not own, eat or benefit from chametz during Passover.</li></ul>
         </div>
         
+        <div style="height:15%" class="w3-container w3-khaki">
+          <div align="center" style="font-size:200%;"><a>What are the rules of Chametz sale?</a> </div>
+        </div>    
+        <div class="w3-sand">
+        <ul><li>They are very complicated. See a summary <a href="https://en.wikipedia.org/wiki/Passover#Sale_of_chametz">here.</a></li></ul>
+        </div>
+    
+        <div style="height:15%" class="w3-container w3-khaki">
+          <div align="center" style="font-size:200%;"><a>What is the smart contract doing?</a> </div>
+        </div>    
+        <div class="w3-sand">
+        <ul><li>With the smart contract jews could sell their Chametz for 30 finney (around $1) and buy it back after Passover ends for 60 finney.</li>
+            <li>When offering Chametz for sale the seller deposit 30 finney.</li>
+            <li>When buying Chametz the buyer pays 30 finney to the contract.</li>
+            <li>When passover ends the buyer returns the Chametz and get 60 finney.</li>            
+        </ul>
+        </div>
+    
+
+        <div style="height:15%" class="w3-container w3-khaki">
+          <div align="center" style="font-size:200%;"><a>What are the important things to know?</a> </div>
+        </div>    
+        <div class="w3-sand">
+        <ul><li>Read the contract.</li>
+            <li>Beware that seller is always losing money and buyer always gain some.</li>
+            <li>Please buy only if you are not a jew.</li>            
+        </ul>
+        </div>
+
+
+        <div class="w3-container w3-light-green">
+          <h1 align="center">The DAPP</h1>
+        </div>
+
+
+
+
+    
         <div align="center">        
             <span class="item-box-address">
                 <span class="item-address">
-                    <span aria-hidden="true" class="icon-user"></span>&nbsp; Public Account:        
+                    <span aria-hidden="true" class="icon-user"></span>&nbsp; Your account:        
                 </span>
             </span>   
             <select id="public_address">
             </select>
-        </div>
-    
-    
-    
-        <div id="after_load">
-            <div align="center"><h2 id="active_deals_title"></h2></div>
-            <div id="my_deals_instructions" align="center">
-                <i class="icon-note"></i>&nbsp;  Deal Id &nbsp;            
-                <i class="icon-speedometer"></i>&nbsp;  Time until next phase &nbsp;
-                <i class="icon-info"></i>&nbsp;  Phase info &nbsp;              
-                <i class="icon-arrow-right hourglass"></i>&nbsp;  What to do next &nbsp;
-            </div>
-            <br>
-
-            <div id="first_new_deal" align="center"></div>
-            <ul id="deal_list">
-            </ul>
-        </div>
+        </div>    
+        
+                <div id="after_load" align="center">
+                        <div><label id="time_label">Time until passover starts</label></div>                        
+                        <div><label id="units_for_sale_label"></label></div>
+                        <div><button id="sell_button" onclick="sell()" type="button">Sell</button><label id="sell_label"> </label></div>
+                        <div><button id="buy_button" onclick="buy()" type="button">Buy</button><label id="buy_label"></label></div>
+                        <div><button id="return_button" onclick="return_chametz()" type="button">Return Chametz</button><label id="return_label"></label></div>
+                        <div><button id="cancel_button" onclick="cancel_sell()" type="button">Cancel Sell</button><label id="cancel_label"></label></div>
+                </div>
+        
         
         <div id="outer">
           <div id="middle">
@@ -121,11 +117,13 @@
                 <div id="before_load" align="center">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                     <span class="sr-only">Loading...</span>    
-                </div>
-            
+                </div>                                               
             </div>
           </div>
         </div>
+
+        
+        
     </div>
     
     </main>
