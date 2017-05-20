@@ -34,7 +34,7 @@ window.addEventListener('load', function() {
     allDealsPage();
 });
 
-function eventDisplay(eventType, eventArgs ) {
+function eventDisplay(eventType, eventArgs, blockNumber ) {
     var toInt = function(bigNumber){
         return parseInt(bigNumber.toString());  
     };
@@ -43,9 +43,11 @@ function eventDisplay(eventType, eventArgs ) {
     this.error = eventArgs.error;
     this.errorInfo = eventArgs.errorInfo;
     this.eventType = eventType;
+    this.blockNumber = blockNumber;
     
     this.toText = function() {
-        var string = this.eventType + " : 0x" + this.sender.toString(16) + " ";
+        var string = this.blockNumber.toString(10) + "   " +  
+        this.eventType + " : " + this.sender.toString(16) + " ";
         if( toInt(this.error) === 0 ) string += "OK";
         else string += "0x" + this.error.toString(16) + " " + "0x" + this.errorInfo.toString(16);
         
@@ -61,7 +63,7 @@ var makeAllDealsTable = function(){
         if( err ) return handleError(err);
         for( var i = 0 ; i < logs.length ; i++ ){
             var args = logs[i].args;
-            var display = new eventDisplay("VerifyClaim", args);
+            var display = new eventDisplay(logs[i].event, args, logs[i].blockNumber);
             var text = display.toText();
             
             $("#all_deals_table").append('<tr><td>' + text + '</td></tr>');
