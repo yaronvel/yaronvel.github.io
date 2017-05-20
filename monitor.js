@@ -20,12 +20,12 @@ var contractABI = [{"constant":true,"inputs":[{"name":"","type":"address"}],"nam
 window.addEventListener('load', function() {
     var web3 = new Web3(new Web3.providers.HttpProvider("http://52.187.131.96:8545"));
     //alert(web3.toString());
-    
+    /*
     alert(web3.isConnected());
     if( ! web3.isConnected()) return noClientError();
     else{
         return noClientError();    
-    }
+    }*/
     globalWeb3 = web3;
     
     var testPoolABI = web3.eth.contract(contractABI);
